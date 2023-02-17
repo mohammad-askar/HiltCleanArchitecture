@@ -3,11 +3,12 @@ package com.example.hlitwithcleanarchitecture.presentation.view_model
 import androidx.compose.runtime.mutableStateOf
 import com.example.hlitwithcleanarchitecture.data.repository.ProductRepositoryImp
 import com.example.hlitwithcleanarchitecture.domain.entity.ProductModel
+import com.example.hlitwithcleanarchitecture.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class ProductViewModel(
-    private val repository: ProductRepositoryImp
+    private val repository: ProductRepository
 ) {
     private val _productsFlow: MutableStateFlow<List<ProductModel>> = MutableStateFlow(value = emptyList())
     val productFlow: StateFlow<List<ProductModel>> = _productsFlow

@@ -39,21 +39,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val db = Room.databaseBuilder(
-//            context = application,
-//            klass = ProductDataBase::class.java,
-//            name = "product_db"
-//        ).build()
-//
-//        val api = Retrofit.Builder()
-//            .baseUrl("https://github.com/")
-//            .build()
-//            .create(ProductApi::class.java)
 
         appContainer = (application as ApplicationWithAppContainer).appContainer
-        val repository = ProductRepositoryImp(dataBase = appContainer.db,api = appContainer.api)
 
-        productViewModel = ProductViewModel(repository = repository)
+        productViewModel = appContainer.productViewModelFactory.create()
         setContent {
             val products by productViewModel.productFlow.collectAsState()
             HlitWithCleanArchitectureTheme {
