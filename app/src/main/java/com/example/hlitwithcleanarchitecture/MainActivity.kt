@@ -3,6 +3,7 @@ package com.example.hlitwithcleanarchitecture
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,23 +29,20 @@ import com.example.hlitwithcleanarchitecture.domain.repository.ProductRepository
 import com.example.hlitwithcleanarchitecture.manual.AppContainer
 import com.example.hlitwithcleanarchitecture.presentation.view_model.ProductViewModel
 import com.example.hlitwithcleanarchitecture.ui.theme.HlitWithCleanArchitectureTheme
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Retrofit
 import retrofit2.create
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private lateinit var productViewModel: ProductViewModel
-    private lateinit var appContainer: AppContainer
+    private val viewModel by viewModels<ProductViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        appContainer = (application as ApplicationWithAppContainer).appContainer
-
-        productViewModel = appContainer.productViewModelFactory.create()
         setContent {
-            val products by productViewModel.productFlow.collectAsState()
+            val products by viewModel.productFlow.collectAsState()
             HlitWithCleanArchitectureTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -57,7 +55,7 @@ class MainActivity : ComponentActivity() {
                             .verticalScroll(state = rememberScrollState())
                             .padding(8.dp)
                     ) {
-                        ShowMessage(message = "the Product Quantity is ${products.size}")
+                        ShowMessage(message = "the Product Quantity is ${products}")
                     }
                 }
             }

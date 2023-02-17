@@ -25,7 +25,7 @@ class AppContainer(
         .create(ProductApi::class.java)
 
     private val repository = ProductRepositoryImp(
-        dataBase = db,
+        //dataBase = db,
         api = api
     )
 
