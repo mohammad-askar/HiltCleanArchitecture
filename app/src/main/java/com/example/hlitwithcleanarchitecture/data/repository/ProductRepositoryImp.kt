@@ -8,7 +8,7 @@ import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class ProductRepositoryImp @Inject constructor(
-    //private val dataBase: ProductDataBase,
+    private val dataBase: ProductDataBase,
     private val api: ProductApi
 ): ProductRepository {
 
