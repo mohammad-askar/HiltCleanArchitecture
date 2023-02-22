@@ -35,6 +35,7 @@ class MainActivity : ComponentActivity() {
             val products by viewModel.productFlow.collectAsState()
             val firstPayment by paymentViewModel.paymentFirstFlow.collectAsState()
             val secondPayment by paymentViewModel.paymentSecondFlow.collectAsState()
+            val notification by paymentViewModel.notifierFlow.collectAsState()
             HlitWithCleanArchitectureTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -52,6 +53,8 @@ class MainActivity : ComponentActivity() {
                         ShowMessage(message = firstPayment)
                         Divider()
                         ShowMessage(message = secondPayment)
+                        Divider()
+                        ShowMessage(message = notification)
                     }
                 }
             }

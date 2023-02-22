@@ -8,7 +8,7 @@ import javax.inject.Inject
 class PaymentRepositoryFirstImp @Inject constructor() : PaymentRepository {
 
     override suspend fun confirm(): String {
-        delay(500L)
+        delay(1000L)
         return "First Implementation"
     }
 }
